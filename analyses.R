@@ -1,6 +1,10 @@
 # This is code to run analyses for the DBS gait project;
 # Code developed by Felicitas Muegge, Amelie Heun, Urs Kleinholdermann and David Pedrosa
 
+# switches / flags / constants
+normfun = "difference" # "proportion"
+
+# subfunctions 
 ipak <- function(pkg){ # taken from https://gist.github.com/stevenworthington/3178163
 new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
 if (length(new.pkg)) 
@@ -14,6 +18,7 @@ ipak(packages)
 
 # Load data in a wide format and convert to something that may be used for estimations of ANOVA and for plotting purposes
 data_dir 	<-	"/media/storage/projekte/DBS_gait/data/"
+if(Sys.info()["user"] == "urs") data_dir = "/home/urs/sync/projects/DBSgait/"
 df 			<- 	read_excel(paste(data_dir, "gait_parameters_mean.xlsx", sep=""), sheet = "gait_parameters_mean") # load data as dataframe
 df 			<- 	df %>% drop_na("Mean value") # remove NA 
 df 			<- 	as.data.frame(df)
@@ -37,17 +42,24 @@ idx_subj 				<- df_eyeball$subj[df_eyeball$condition == "OFF"] # data normalised
 groups = list(as.factor(c("OFF", "033", "066", "100")), as.factor(c("OFF", "040", "090", "130")), as.factor(c("OFF", "030", "085", "130")))
 names  = c("amplitude", "pulse_width", "frequency")
 for(i in 1:length(groups)) {
- df_temp <- df_eyeball[is.element(df_eyeball$subj, idx_subj),]
- df_temp <- df_temp[is.element(df_temp$condition, groups[[i]]),]
+  df_temp <- df_eyeball[is.element(df_eyeball$subj, idx_subj),]
+  df_temp <- df_temp[is.element(df_temp$condition, groups[[i]]),]
 
- # Normalisation
-df_temp 			<- df_temp[is.element(df_temp$subj, idx_subj),]
-df_temp 			<- df_temp %>%
-    group_by(subj) %>%
-    mutate(normalised.value = average.value / average.value[condition == "OFF"]) # Normalisation
- assign(names[i], df_temp) 
- }
-
+  # Normalisation
+  df_temp 			<- df_temp[is.element(df_temp$subj, idx_subj),]
+  if(normfun == "proportion"){
+    df_temp 			<- df_temp %>%
+        group_by(subj) %>%
+        mutate(normalised.value = average.value / average.value[condition == "OFF"]) # Normalisation
+     assign(names[i], df_temp) 
+  } else if (normfun == "difference"){
+    df_temp 			<- df_temp %>%
+        group_by(subj) %>%
+        mutate(normalised.value = average.value - average.value[condition == "OFF"]) # Normalisation
+     assign(names[i], df_temp) 
+  }
+}
+ 
 p1 <- ggplot(amplitude, aes(x=condition, y=normalised.value, group=subj, color=subj)) +
 geom_point(stat='summary', fun=sum) +
 stat_summary(fun=sum, geom="line") + 
