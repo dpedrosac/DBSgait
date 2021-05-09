@@ -39,7 +39,7 @@ df_eyeball$average.value	<- as.numeric(df_eyeball$average.value)
 
 # Separate data and normalise to "OFF" condition
 idx_subj 				<- df_eyeball$subj[df_eyeball$condition == "OFF"] # data normalised to "OFF" condition so analyses restricted to those who were recorded in the "OFF"
-groups = list(as.factor(c("OFF", "033", "066", "100")), as.factor(c("OFF", "040", "090", "130")), as.factor(c("OFF", "030", "085", "130")))
+groups = list(as.factor(c("OFF", "033", "066", "100")), as.factor(c("OFF", "040", "090")), as.factor(c("OFF", "030", "085", "130")))
 names  = c("amplitude", "pulse_width", "frequency")
 for(i in 1:length(groups)) {
   df_temp <- df_eyeball[is.element(df_eyeball$subj, idx_subj),]
