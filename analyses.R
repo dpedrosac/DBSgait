@@ -13,7 +13,7 @@ sapply(pkg, require, character.only = TRUE)
 }
 
 ## First specify the packages of interest and install them if necessary
-packages = c("readxl", "tidyr", "dplyr", "ggplot2")
+packages = c("readxl", "tidyr", "dplyr", "ggplot2", "reshape2")
 ipak(packages)
 
 # Load data in a wide format and convert to something that may be used for estimations of ANOVA and for plotting purposes
@@ -75,3 +75,42 @@ stat_summary(fun=sum, geom="line")
 
 # Problems right now: Dimensionaly reduction seem reasonable (PCA, k-nearest neighbours, etc.); Why aren't we looking at the two sensors separately?
 # with so many data, differentiating the two sides would be a small effort and could give more insight.
+
+# Create correlation matrices for all subjects
+# cpde adapted from: http://www.sthda.com/english/wiki/ggplot2-quick-correlation-matrix-heatmap-r-software-and-data-visualization
+
+## Helper functions
+# Get lower triangle of the correlation matrix
+  get_lower_tri<-function(cormat){
+    cormat[upper.tri(cormat)] <- NA
+    return(cormat)
+  }
+  # Get upper triangle of the correlation matrix
+  get_upper_tri <- function(cormat){
+    cormat[lower.tri(cormat)]<- NA
+    return(cormat)
+  } 
+
+reorder_cormat <- function(cormat){
+# Use correlation between variables as distance
+dd <- as.dist((1-cormat)/2)
+hc <- hclust(dd)
+cormat <-cormat[hc$order, hc$order]
+}
+
+data_wide 				<- spread(df, gait.parameter, average.value)
+data_wide[, c(4:20)] 	<- sapply(data_wide[, c(4:20)], as.numeric) # convert to numeric to estimate the correlations
+cormat 						<- round(cor(data_wide[,4:20]),2)
+cormat 						<- reorder_cormat(cormat) # Reorder the correlation matrix
+upper_tri 					<- get_upper_tri(cormat)
+melted_cormat 			<- melt(upper_tri, na.rm = TRUE) # Melt correlation matrix
+
+p4 <- ggheatmap <- ggplot(melted_cormat, aes(Var2, Var1, fill = value))+
+ geom_tile(color = "white")+
+ scale_fill_gradient2(low = "blue", high = "red", mid = "white", 
+   midpoint = 0, limit = c(-1,1), space = "Lab", 
+    name="Pearson\nCorrelation") +
+  theme_minimal()+ # minimal theme
+ theme(axis.text.x = element_text(angle = 45, vjust = 1, 
+    size = 12, hjust = 1))+
+ coord_fixed()
