@@ -1,0 +1,29 @@
+group_center <- function(var, groups, fun = "diff"){
+# subtract group means from data
+# 2021-06-07 Urs Kleinholdermann with help from here:
+# https://stackoverflow.com/questions/40267772/mean-centering-based-on-conditions
+  df = data.frame(var, groups)
+  ag = aggregate(var~groups, df, mean, na.rm = TRUE)
+  merge.df = merge(df, ag, by = "groups", suffixes = c(".data", ".mean"))
+  merge.df$diff = merge.df$var.data - merge.df$var.mean
+
+return(merge.df$diff)    
+}
+
+group_reference <- function(groupvar, referencevar, referencelevel, varnames, data){
+# apply a reference level to all members of a group either by
+# subtraction or division
+# 2021-06-07 Urs Kleinholdermann
+#
+# ... there is likely much more elegant way using aggregate, merge and apply
+for(group in unique(data[[groupvar]])){
+  for(var in varnames){
+    ix = data[groupvar] == group
+    mu = mean(data[var][ix & data[referencevar] == referencelevel], na.rm = TRUE)
+    data[var][ix] = data[var][ix] - mu
+  } # end of var loop
+} # end of group loop
+    
+return(data)
+}
+
