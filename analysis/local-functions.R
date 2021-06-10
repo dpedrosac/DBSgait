@@ -1,5 +1,14 @@
 slf <- function(){source("local-functions.R")}
 
+ipak <- function(pkg){
+# taken from https://gist.github.com/stevenworthington/3178163
+new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
+if (length(new.pkg)) 
+    install.packages(new.pkg, dependencies = TRUE)
+sapply(pkg, require, character.only = TRUE)
+}
+
+
 get_data <- function(off.normalized = FALSE){
 # get local constants and paths
 source("local-constants.R")
