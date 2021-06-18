@@ -1,7 +1,8 @@
 local_constants <- function(){
 out = list()
-out$paths =list()
 
+# set paths dependent on user
+out$paths =list()
 if(Sys.info()["user"] == "urs"){
   out$paths$root    = "/home/urs/sync/projects/DBSgait"
   out$paths$data    = file.path(out$paths$root, "data"   )

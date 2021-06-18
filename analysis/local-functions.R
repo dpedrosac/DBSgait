@@ -8,6 +8,13 @@ if (length(new.pkg))
 sapply(pkg, require, character.only = TRUE)
 }
 
+get_dvnames <- function(df){
+# return dependent variable names
+#
+# would better be placed in local-constants but get_data
+# depends on local-constants being complete
+return(names(df)[grep("_", names(df))])
+}
 
 get_data <- function(off.normalized = FALSE){
 # get local constants and paths
@@ -26,6 +33,20 @@ if(off.normalized){
   df = group_reference(varnames, df)
 }
 
+# define the dbs conditions for convenient filtering
+df$dbscond = NA
+df$dbscond[df$configuration == "040" | df$configuration == "090"] = "pulse"
+df$dbscond[  df$configuration == "030"
+           | df$configuration == "085"
+           | df$configuration == "130"] = "frequency"
+df$dbscond[  df$configuration == "033"
+           | df$configuration == "066"
+           | df$configuration == "100"] = "strength"
+df$dbscond[df$configuration == "OFF"] = "OFF"
+
+# rename patient_id for convenient filtering of dependent variables by undescores
+names(df)[names(df) == 'patient_id'] = 'id'    
+    
 return(df)
 } # end of get_data function                
 
