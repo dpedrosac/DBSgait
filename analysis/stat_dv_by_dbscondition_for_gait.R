@@ -13,33 +13,16 @@ model <- function(dv, cond){
           , na.action = na.omit
           )
 
-  m1 = lme( dv ~ test
-          , random = ~1|id
-          , data = subset(df, dbscond == cond & !grepl("tug", test))
-          , method = "ML"
-          , na.action = na.omit
-          )
+  m1 = update(m0, ~ . + test)
+  m2 = update(m1, ~ . + configuration)
+  m3 = update(m1, ~ . * configuration)
 
-  m2 = lme( dv ~ test + configuration
-          , random = ~1|id
-          , data = subset(df, dbscond == cond & !grepl("tug", test))
-          , method = "ML"
-          , na.action = na.omit
-          )
-
-  m3 = lme( dv ~ test * configuration
-          , random = ~1|id
-          , data = subset(df, dbscond == cond & !grepl("tug", test))
-          , method = "ML"
-          , na.action = na.omit
-          )
- 
- out = data.frame( dv            = dv
-                 , condition     = cond
-                 , p.test        = anova(m0, m1)[["p-value"]][2]
-                 , p.condition   = anova(m1, m2)[["p-value"]][2]
-                 , p.interaction = anova(m2, m3)[["p-value"]][2]
-                 , stringsAsFactors = FALSE)
+  out = data.frame( dv            = dv
+                  , condition     = cond
+                  , p.test        = anova(m0, m1)[["p-value"]][2]
+                  , p.condition   = anova(m1, m2)[["p-value"]][2]
+                  , p.interaction = anova(m2, m3)[["p-value"]][2]
+                  , stringsAsFactors = FALSE)
 
 return(out)
 }
