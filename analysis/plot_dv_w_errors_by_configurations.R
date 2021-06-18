@@ -1,9 +1,39 @@
 source("local-functions.R")
 
-dvname = "mean_gait_speed_meter_per_second"
+# dvname = "mean_gait_speed_meter_per_second"
+# dvname =  "abs_75th_percentile_turning_angle_deg"              
+# dvname =  "amax_landing_impact_g"                              
+# dvname =  "amax_max_sensor_lift_cm"                            
+# dvname =  "asymmetry_gait_speed_left_right_per_cent"           
+# dvname =  "asymmetry_heel_strike_angle_left_right_per_cent"    
+# dvname =  "asymmetry_landing_impact_left_right_per_cent"       
+# dvname =  "asymmetry_max_lateral_excursion_left_right_per_cent"
+# dvname =  "asymmetry_max_sensor_lift_left_right_per_cent"      
+# dvname =  "asymmetry_stride_length_left_right_per_cent"        
+# dvname =  "asymmetry_stride_time_left_right_per_cent"          
+# dvname =  "asymmetry_swing_time_left_right_per_cent"           
+# dvname =  "asymmetry_toe_off_angle_left_right_per_cent"        
+# dvname =  "asymmetry_turning_angle_left_right_per_cent"        
+# dvname =  "cv_stride_length_per_cent"                          
+# dvname =  "mean_gait_speed_meter_per_second"                   
+# dvname =  "mean_heel_strike_angle_deg"                         
+# dvname =  "mean_landing_impact_g"                              
+# dvname =  "mean_max_lateral_excursion_cm"                      
+# dvname =  "mean_max_sensor_lift_cm"                            
+# dvname =  "mean_stride_length_cm"                              
+ dvname =  "mean_stride_time_s"                                 
+# dvname =  "mean_swing_time_per_cent"                           
+# dvname =  "mean_toe_off_angle_deg"                             
+# dvname =  "std_max_lateral_excursion_cm"                       
+# dvname =  "std_max_sensor_lift_cm"                             
+# dvname =  "std_stride_length_cm"                               
+# dvname =  "std_stride_time_s"                                  
+
+
 
 df = get_data()
-df.n = subset(df, test == "normal")
+#df.n = df
+df.n = subset(df, test == "free")
 df.n$dv = df.n[[dvname]]
 ag = do.call(data.frame, aggregate( dv~configuration, data = df.n
                        , function(x){c(mu = mean(x), sd = sd(x))}))
