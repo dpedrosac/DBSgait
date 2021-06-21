@@ -1,5 +1,10 @@
 slf <- function(){source("local-functions.R")}
 
+msg <- function(..., verbose = TRUE, newline = TRUE, sep = " "){
+  if(verbose) cat(paste(..., sep = sep))
+  if(newline) cat("\n")
+}
+
 ipak <- function(pkg){
 # taken from https://gist.github.com/stevenworthington/3178163
 new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]

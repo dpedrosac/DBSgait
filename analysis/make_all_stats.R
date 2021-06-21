@@ -17,6 +17,7 @@ ipak(c(
      # , "car"
      # , "ez"
        "nlme"
+       ,"e1071"
       ))
 
 # get data
@@ -28,4 +29,5 @@ loc$dvnames = get_dvnames(df)
 
 # --- Stats -----------------------------------------------------------------
 
-source("stat_dv_by_dbscondition_for_gait.R")
+#source("stat_dv_by_dbscondition_for_gait.R")
+source("stat_dbs_setting_prediction.R")
