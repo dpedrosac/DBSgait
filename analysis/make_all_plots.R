@@ -8,26 +8,19 @@
 source("local-functions.R")
 source("local-constants.R")
 
-# set correct orthogonal contrast settings
-options(contrasts=c("contr.sum","contr.poly"))       
+loc = local_constants()
+loc$dvnames = get_dvnames(df)
 
 # load packages
 ipak(c(
-     #   "rstatix"
-     # , "car"
-     # , "ez"
-       "nlme"
-       ,"e1071"
+      "corrplot"
+      # "ggplot2"
+      #,"reshape2"
       ))
 
 # get data
 df = get_data()
 
-# define other variables
-loc = local_constants()
-loc$dvnames = get_dvnames(df)
+# --- plots -----------------------------------------------------------------
 
-# --- Stats -----------------------------------------------------------------
-
-#source("stat_dv_by_dbscondition_for_gait.R")
-#source("stat_dbs_setting_prediction.R")
+source("plot_dv_cross_correlation.R")
