@@ -4,3 +4,4 @@ scipy
 tqdm
 ipywidgets
 nb_black
+scikit_posthocs
