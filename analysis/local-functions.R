@@ -21,13 +21,16 @@ get_dvnames <- function(df){
 return(names(df)[grep("_", names(df))])
 }
 
-get_data <- function(off.normalized = FALSE){
+get_data <- function(off.normalized = FALSE, type = "aggregated"){
 # get local constants and paths
 source("local-constants.R")
 lc = local_constants()
 
+if(type == "aggregated") datafile = "gait_params.csv"
+if(type == "individual") datafile = "stride_params.csv"    
+    
 # read in data
-df = read.csv(file.path(lc$paths$data, "gait_params.csv")
+df = read.csv(file.path(lc$paths$data, datafile)
              , header = TRUE, stringsAsFactors = FALSE
              , na.strings = "NaN")
 df[is.na(df)] = NA # hack for different types of NA in df
@@ -49,8 +52,12 @@ df$dbscond[  df$configuration == "033"
            | df$configuration == "100"] = "strength"
 df$dbscond[df$configuration == "OFF"] = "OFF"
 
-# rename patient_id for convenient filtering of dependent variables by undescores
+# do some renaming for convenient filtering of dependent variables by undescores
 names(df)[names(df) == 'patient_id'] = 'id'    
+if(type == "individual"){
+  names(df)[names(df) == 'stride_id'] = 'stride'
+  names(df)[names(df) == 'time_stamp_s'] = 'timestamp'    
+}
     
 return(df)
 } # end of get_data function                

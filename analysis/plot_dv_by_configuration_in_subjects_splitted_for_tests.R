@@ -10,7 +10,7 @@ plotfun <- function(dvname, df){
   }
 
   xyplot(dv ~ as.factor(configuration)|test
-        , groups = patient_id
+        , groups = id
         , data = df
         , panel = mypanel
         )
@@ -18,5 +18,5 @@ plotfun <- function(dvname, df){
 
 df = get_data(off.normalize = TRUE)
 
-plotfun("mean_stride_length_cm", df)
+plotfun("mean_gait_speed_meter_per_second", df)
 
