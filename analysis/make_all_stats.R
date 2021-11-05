@@ -12,22 +12,17 @@ source("local-constants.R")
 options(contrasts=c("contr.sum","contr.poly"))       
 
 # load packages
-ipak(c(
-     #   "rstatix"
-     # , "car"
-     # , "ez"
-       "nlme"
-       ,"e1071"
-      ))
+ipak(c("nlme","e1071"))
 
 # get data
-df = get_data()
+df = get_data(type = "all", off_normalized = "FALSE", remove_outliers = TRUE, do_pca = 4)
 
 # define other variables
 loc = local_constants()
 loc$dvnames = get_dvnames(df)
 
 # --- Stats -----------------------------------------------------------------
+
 
 #source("stat_dv_by_dbscondition_for_gait.R")
 #source("stat_dbs_setting_prediction.R")
