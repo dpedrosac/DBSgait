@@ -29,8 +29,9 @@ return(x)
 }
 
 get_data <- function( off_normalized = FALSE
-                    , type = "aggregated"
-                    , remove_outliers = FALSE){
+                    , type = "individual"
+                    , remove_outliers = FALSE
+                    , do_pca = FALSE){
 # get local constants and paths
 source("local-constants.R")
 lc = local_constants()
@@ -47,6 +48,12 @@ if(type == "clinical"){
   df$id[-ix] = gsub("P","Pat_" ,df$id[-ix])
   return(df)
 }
+if(type == "all"){
+  df  = get_data(type = "individual", off_normalized, remove_outliers, do_pca)
+  dfc = get_data(type = "clinical")
+  df = merge(df, dfc, by = "id", all = TRUE, sort = FALSE)
+  return(df)
+}
     
 # read in data
 df = read.csv(file.path(lc$paths$data, datafile)
@@ -59,7 +66,7 @@ df[is.na(df)] = NA # hack for different types of NA in df
 # do some renaming for convenient filtering of dependent variables by undescores
 names(df)[names(df) == 'patient_id'] = 'id'    
 if(type == "individual"){
-  names(df)[names(df) == 'stride_id'] = 'stride'
+  names(df)[names(df) == 'stride_id'   ] = 'stride'
   names(df)[names(df) == 'time_stamp_s'] = 'timestamp'    
 }
     
@@ -80,15 +87,35 @@ if(off_normalized){
     
 # define the dbs conditions for convenient filtering
 df$dbscond = NA
-df$dbscond[df$configuration == "040" | df$configuration == "090"] = "pulse"
-df$dbscond[  df$configuration == "030"
-           | df$configuration == "085"
-           | df$configuration == "130"] = "frequency"
-df$dbscond[  df$configuration == "033"
-           | df$configuration == "066"
-           | df$configuration == "100"] = "strength"
-df$dbscond[df$configuration == "OFF"] = "OFF"
-    
+df$dbscond[ df$configuration ==  "40"
+          | df$configuration ==  "90"] = "pulse"
+df$dbscond[ df$configuration ==  "30"
+          | df$configuration ==  "85"
+          | df$configuration == "130"] = "frequency"
+df$dbscond[ df$configuration ==  "33"
+          | df$configuration ==  "66"
+          | df$configuration == "100"] = "strength"
+df$dbscond[ df$configuration == "OFF"] = "OFF"
+
+# make configuration a factor and sort it sensibly
+df$configuration = factor(df$configuration
+                         ,levels = c("OFF"
+                                    ,"33", "66", "100"
+                                    ,"40", "85", "130"
+                                    ,"30", "60", "90"))
+
+# do pca and append PCs if requested
+if(do_pca){
+  dvnames = get_dvnames(df)
+  ix = complete.cases(df[,dvnames])
+  pca = prcomp(df[ix,dvnames], scale = TRUE, center = TRUE)
+  pred = as.data.frame(predict(pca, newdata = df))
+  pcanames = paste("PC", c(1:do_pca), sep = "_")
+  names(pred) <- pcanames
+  save("pca", file = file.path(lc$paths$results,"pca.Rdata"))
+  df = cbind(df, pred[, pcanames])
+}
+
 return(df)
 } # end of get_data function                
 
