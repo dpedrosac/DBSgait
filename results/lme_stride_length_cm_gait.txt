@@ -1,0 +1,38 @@
+
+	 Simultaneous Tests for General Linear Hypotheses
+
+Fit: lme.formula(fixed = modelformula, data = ddf, random = ~1 | id, 
+    weights = varIdent(form = ~1 | configuration * test), method = "ML", 
+    na.action = na.omit, control = lmeControl(opt = "optim"))
+
+Linear Hypotheses:
+                                         Estimate Std. Error z value Pr(>|z|)
+configuration33 - configurationOFF == 0   -0.3143     0.2460  -1.277 1.000000
+configuration66 - configurationOFF == 0    1.5541     0.2232   6.963 4.00e-11
+configuration100 - configurationOFF == 0   3.9525     0.2208  17.903  < 2e-16
+configuration40 - configurationOFF == 0    2.7196     0.2401  11.327  < 2e-16
+configuration85 - configurationOFF == 0    5.4216     0.2235  24.259  < 2e-16
+configuration130 - configurationOFF == 0   1.6368     0.2270   7.211 6.64e-12
+configuration30 - configurationOFF == 0    1.0301     0.2433   4.234 0.000276
+configuration90 - configurationOFF == 0    3.9523     0.2733  14.461  < 2e-16
+configuration40 - configuration85 == 0    -2.7020     0.2285 -11.826  < 2e-16
+configuration40 - configuration130 == 0    1.0828     0.2326   4.656 3.88e-05
+configuration85 - configuration130 == 0    3.7848     0.2143  17.658  < 2e-16
+configuration30 - configuration90 == 0    -2.9223     0.2834 -10.312  < 2e-16
+                                            
+configuration33 - configurationOFF == 0     
+configuration66 - configurationOFF == 0  ***
+configuration100 - configurationOFF == 0 ***
+configuration40 - configurationOFF == 0  ***
+configuration85 - configurationOFF == 0  ***
+configuration130 - configurationOFF == 0 ***
+configuration30 - configurationOFF == 0  ***
+configuration90 - configurationOFF == 0  ***
+configuration40 - configuration85 == 0   ***
+configuration40 - configuration130 == 0  ***
+configuration85 - configuration130 == 0  ***
+configuration30 - configuration90 == 0   ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+(Adjusted p values reported -- bonferroni method)
+

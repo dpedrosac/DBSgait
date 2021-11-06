@@ -1,0 +1,38 @@
+
+	 Simultaneous Tests for General Linear Hypotheses
+
+Fit: lme.formula(fixed = modelformula, data = ddf, random = ~1 | id, 
+    weights = varIdent(form = ~1 | configuration * test), method = "ML", 
+    na.action = na.omit, control = lmeControl(opt = "optim"))
+
+Linear Hypotheses:
+                                          Estimate Std. Error z value Pr(>|z|)
+configuration33 - configurationOFF == 0   0.022819   0.006270   3.639 0.003279
+configuration66 - configurationOFF == 0   0.018135   0.005877   3.086 0.024374
+configuration100 - configurationOFF == 0  0.044671   0.005932   7.531 6.05e-13
+configuration40 - configurationOFF == 0   0.059086   0.006338   9.323  < 2e-16
+configuration85 - configurationOFF == 0   0.087667   0.006488  13.512  < 2e-16
+configuration130 - configurationOFF == 0  0.028510   0.005939   4.800 1.90e-05
+configuration30 - configurationOFF == 0   0.029110   0.006107   4.767 2.25e-05
+configuration90 - configurationOFF == 0   0.020961   0.007595   2.760 0.069381
+configuration40 - configuration85 == 0   -0.028581   0.006732  -4.246 0.000262
+configuration40 - configuration130 == 0   0.030576   0.006235   4.904 1.13e-05
+configuration85 - configuration130 == 0   0.059157   0.006316   9.367  < 2e-16
+configuration30 - configuration90 == 0    0.008149   0.007675   1.062 1.000000
+                                            
+configuration33 - configurationOFF == 0  ** 
+configuration66 - configurationOFF == 0  *  
+configuration100 - configurationOFF == 0 ***
+configuration40 - configurationOFF == 0  ***
+configuration85 - configurationOFF == 0  ***
+configuration130 - configurationOFF == 0 ***
+configuration30 - configurationOFF == 0  ***
+configuration90 - configurationOFF == 0  .  
+configuration40 - configuration85 == 0   ***
+configuration40 - configuration130 == 0  ***
+configuration85 - configuration130 == 0  ***
+configuration30 - configuration90 == 0      
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+(Adjusted p values reported -- bonferroni method)
+
