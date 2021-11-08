@@ -19,8 +19,12 @@ ipak(c(
       ))
 
 # get data
-df = get_data()
+#df = get_data()
 
 # --- plots -----------------------------------------------------------------
 
-source("plot_dv_cross_correlation.R")
+source("plot_lme_coefficients_by_dbs_condition.R")
+
+#  --- dump -----------------------------------------------------------------
+# plot functions not used for the publication figures
+#source("plot_dv_cross_correlation.R")

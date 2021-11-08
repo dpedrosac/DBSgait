@@ -28,27 +28,27 @@ lme_model <- function(dvname, testname){
           , na.action = na.omit)
 
  # conduct planned comparisons and print them to file
-  ms = summary(glht(m, linfct = c("configuration33  - configurationOFF = 0"
-                                 ,"configuration66  - configurationOFF = 0"
-                                 ,"configuration100 - configurationOFF = 0"
-                                 ,"configuration40  - configurationOFF = 0"
-                                 ,"configuration85  - configurationOFF = 0"
-                                 ,"configuration130 - configurationOFF = 0"
-                                 ,"configuration30  - configurationOFF = 0"
-                                 ,"configuration90  - configurationOFF = 0"
-                                 ,"configuration40  - configuration85  = 0"
-                                 ,"configuration40  - configuration130 = 0"
-                                 ,"configuration85  - configuration130 = 0"
-                                 ,"configuration30  - configuration90  = 0"
-                                 ))
-              ,test=adjusted("bonferroni"))
+  mt = glht(m, linfct = c("configuration33  - configurationOFF = 0"
+                         ,"configuration66  - configurationOFF = 0"
+                         ,"configuration100 - configurationOFF = 0"
+                         ,"configuration40  - configurationOFF = 0"
+                         ,"configuration85  - configurationOFF = 0"
+                         ,"configuration130 - configurationOFF = 0"
+                         ,"configuration30  - configurationOFF = 0"
+                         ,"configuration90  - configurationOFF = 0"
+                         ,"configuration40  - configuration85  = 0"
+                         ,"configuration40  - configuration130 = 0"
+                         ,"configuration85  - configuration130 = 0"
+                         ,"configuration30  - configuration90  = 0"
+                         )
+            ,test=adjusted("bonferroni"))
 
  # save results to rdata and plain text files
   rdfile  = file.path(loc$paths$results,paste("lme_",dvname,"_",testname,".Rdata",sep=""))
   txtfile = file.path(loc$paths$results,paste("lme_",dvname,"_",testname,".txt"  ,sep=""))
-  save("m","ms",file = rdfile)
+  save("m","mt",file = rdfile)
   sink(file = txtfile)
-    print(ms)
+    print(summary(mt))
   sink(file = NULL)
 }
 

@@ -30,11 +30,12 @@
 # --- Log -------------------------------------------------------------------
 
   sink(file = "analysis.log")
-  msg(paste("Analysis run on", date))
-  msg("Machine and R version information:")
-  version
-  msg("Package version information:")
-  sapply(pkgs, getNamespaceVersion)
+    msg(paste("Analysis run on", date()))
+    msg("\n\nMachine and R version information:")
+    version
+    msg("\n\nPackage version information:")
+    sapply(pkgs, getNamespaceVersion)
+  sink(file = NULL)
 
 # --- Dump -------------------------------------------------------------------
 
