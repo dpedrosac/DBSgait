@@ -1,5 +1,5 @@
 dvs = c("gait_speed_meter_per_second", "stride_length_cm", "max_sensor_lift_cm", "PC_1")
-tests = c("gait", "tug")
+tests = c("gait", "tug", "fast", "slow")
 
 lme_plot <- function(dvname, test){
 

@@ -87,9 +87,9 @@ if(off_normalized){
     
 # define the dbs conditions for convenient filtering
 df$dbscond = NA
-df$dbscond[ df$configuration ==  "30"
-          | df$configuration ==  "90"] = "pulse"
 df$dbscond[ df$configuration ==  "40"
+          | df$configuration ==  "90"] = "pulse"
+df$dbscond[ df$configuration ==  "30"
           | df$configuration ==  "85"
           | df$configuration == "130"] = "frequency"
 df$dbscond[ df$configuration ==  "33"
@@ -101,8 +101,8 @@ df$dbscond[ df$configuration == "OFF"] = "OFF"
 df$configuration = factor(df$configuration
                          ,levels = c("OFF"
                                     ,"33", "66", "100"
-                                    ,"40", "85", "130"
-                                    ,"30", "60", "90"))
+                                    ,"30", "85", "130"
+                                    ,"40", "90"))
 
 # do pca and append PCs if requested
 if(do_pca){

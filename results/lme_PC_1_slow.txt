@@ -1,0 +1,38 @@
+
+	 Simultaneous Tests for General Linear Hypotheses
+
+Fit: lme.formula(fixed = modelformula, data = ddf, random = ~1 | id, 
+    weights = varIdent(form = ~1 | configuration * test), method = "ML", 
+    na.action = na.omit, control = lmeControl(opt = "optim"))
+
+Linear Hypotheses:
+                                         Estimate Std. Error z value Pr(>|z|)
+configuration33 - configurationOFF == 0  -0.41104    0.06236  -6.591  < 1e-04
+configuration66 - configurationOFF == 0  -0.34712    0.05392  -6.438  < 1e-04
+configuration100 - configurationOFF == 0 -0.28591    0.05545  -5.157  < 1e-04
+configuration40 - configurationOFF == 0  -0.71349    0.05775 -12.355  < 1e-04
+configuration85 - configurationOFF == 0  -0.47811    0.05248  -9.111  < 1e-04
+configuration130 - configurationOFF == 0 -0.27604    0.05725  -4.822  < 1e-04
+configuration30 - configurationOFF == 0  -0.38924    0.05442  -7.153  < 1e-04
+configuration90 - configurationOFF == 0  -0.35184    0.06362  -5.531  < 1e-04
+configuration40 - configuration85 == 0   -0.23538    0.05614  -4.193 0.000309
+configuration40 - configuration130 == 0  -0.43745    0.06100  -7.171  < 1e-04
+configuration85 - configuration130 == 0  -0.20207    0.05565  -3.631 0.003090
+configuration30 - configuration90 == 0   -0.03740    0.06487  -0.577 0.998168
+                                            
+configuration33 - configurationOFF == 0  ***
+configuration66 - configurationOFF == 0  ***
+configuration100 - configurationOFF == 0 ***
+configuration40 - configurationOFF == 0  ***
+configuration85 - configurationOFF == 0  ***
+configuration130 - configurationOFF == 0 ***
+configuration30 - configurationOFF == 0  ***
+configuration90 - configurationOFF == 0  ***
+configuration40 - configuration85 == 0   ***
+configuration40 - configuration130 == 0  ***
+configuration85 - configuration130 == 0  ** 
+configuration30 - configuration90 == 0      
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+(Adjusted p values reported -- single-step method)
+
