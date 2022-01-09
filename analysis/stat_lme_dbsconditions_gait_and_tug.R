@@ -42,15 +42,15 @@ lme_model <- function(dvname, testname){
   mt = glht(m, linfct = c("configuration33  - configurationOFF = 0"
                          ,"configuration66  - configurationOFF = 0"
                          ,"configuration100 - configurationOFF = 0"
-                         ,"configuration40  - configurationOFF = 0"
+                         ,"configuration30  - configurationOFF = 0"
                          ,"configuration85  - configurationOFF = 0"
                          ,"configuration130 - configurationOFF = 0"
-                         ,"configuration30  - configurationOFF = 0"
+                         ,"configuration40  - configurationOFF = 0"
                          ,"configuration90  - configurationOFF = 0"
-                         ,"configuration40  - configuration85  = 0"
-                         ,"configuration40  - configuration130 = 0"
+                         ,"configuration30  - configuration85  = 0"
+                         ,"configuration30  - configuration130 = 0"
                          ,"configuration85  - configuration130 = 0"
-                         ,"configuration30  - configuration90  = 0"
+                         ,"configuration40  - configuration90  = 0"
                          )
             ,test=adjusted("bonferroni"))
 

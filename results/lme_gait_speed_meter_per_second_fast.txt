@@ -7,31 +7,31 @@ Fit: lme.formula(fixed = modelformula, data = ddf, random = ~1 | id,
 
 Linear Hypotheses:
                                           Estimate Std. Error z value Pr(>|z|)
-configuration33 - configurationOFF == 0   0.012331   0.008295   1.487  0.68432
-configuration66 - configurationOFF == 0   0.024877   0.007423   3.351  0.00869
-configuration100 - configurationOFF == 0  0.013298   0.007652   1.738  0.50225
-configuration40 - configurationOFF == 0   0.078089   0.008427   9.267  < 0.001
+configuration33 - configurationOFF == 0   0.012331   0.008295   1.487  0.68386
+configuration66 - configurationOFF == 0   0.024877   0.007423   3.351  0.00864
+configuration100 - configurationOFF == 0  0.013298   0.007652   1.738  0.50188
+configuration30 - configurationOFF == 0   0.069775   0.008415   8.292  < 0.001
 configuration85 - configurationOFF == 0   0.085782   0.008072  10.628  < 0.001
 configuration130 - configurationOFF == 0  0.036488   0.008050   4.533  < 0.001
-configuration30 - configurationOFF == 0   0.069775   0.008415   8.292  < 0.001
-configuration90 - configurationOFF == 0   0.021058   0.010662   1.975  0.34333
-configuration40 - configuration85 == 0   -0.007693   0.008691  -0.885  0.97089
-configuration40 - configuration130 == 0   0.041601   0.008732   4.764  < 0.001
+configuration40 - configurationOFF == 0   0.078089   0.008427   9.267  < 0.001
+configuration90 - configurationOFF == 0   0.021058   0.010662   1.975  0.34299
+configuration30 - configuration85 == 0   -0.016007   0.008782  -1.823  0.44224
+configuration30 - configuration130 == 0   0.033287   0.008779   3.792  0.00165
 configuration85 - configuration130 == 0   0.049294   0.008272   5.959  < 0.001
-configuration30 - configuration90 == 0    0.048717   0.011168   4.362  < 0.001
+configuration40 - configuration90 == 0    0.057031   0.011159   5.111  < 0.001
                                             
 configuration33 - configurationOFF == 0     
 configuration66 - configurationOFF == 0  ** 
 configuration100 - configurationOFF == 0    
-configuration40 - configurationOFF == 0  ***
+configuration30 - configurationOFF == 0  ***
 configuration85 - configurationOFF == 0  ***
 configuration130 - configurationOFF == 0 ***
-configuration30 - configurationOFF == 0  ***
+configuration40 - configurationOFF == 0  ***
 configuration90 - configurationOFF == 0     
-configuration40 - configuration85 == 0      
-configuration40 - configuration130 == 0  ***
+configuration30 - configuration85 == 0      
+configuration30 - configuration130 == 0  ** 
 configuration85 - configuration130 == 0  ***
-configuration30 - configuration90 == 0   ***
+configuration40 - configuration90 == 0   ***
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 (Adjusted p values reported -- single-step method)
