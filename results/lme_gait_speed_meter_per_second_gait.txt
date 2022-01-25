@@ -7,7 +7,7 @@ Fit: lme.formula(fixed = modelformula, data = ddf, random = ~1 | id,
 
 Linear Hypotheses:
                                           Estimate Std. Error z value Pr(>|z|)
-configuration33 - configurationOFF == 0   0.007574   0.002779   2.725   0.0604
+configuration33 - configurationOFF == 0   0.007574   0.002779   2.725   0.0611
 configuration66 - configurationOFF == 0   0.011372   0.002556   4.449   <0.001
 configuration100 - configurationOFF == 0  0.039297   0.002540  15.472   <0.001
 configuration30 - configurationOFF == 0   0.019220   0.002768   6.943   <0.001

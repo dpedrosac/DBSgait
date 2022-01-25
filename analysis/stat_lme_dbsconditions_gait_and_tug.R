@@ -1,5 +1,5 @@
 dvs = c("gait_speed_meter_per_second", "stride_length_cm", "max_sensor_lift_cm", "PC_1")
-tests = c("fast", "slow", "tug", "gait")
+tests = c("fast", "normal", "slow", "tug", "gait")
 
 lme_model <- function(dvname, testname){
 
@@ -11,6 +11,11 @@ lme_model <- function(dvname, testname){
 
   if(testname == "fast"){
     ddf = subset(df, test == "fast")
+    modelformula = as.formula(paste(dvname, "-1 + configuration", sep = "~"))
+  }
+
+  if(testname == "normal"){
+    ddf = subset(df, test == "normal")
     modelformula = as.formula(paste(dvname, "-1 + configuration", sep = "~"))
   }
 
@@ -54,10 +59,16 @@ lme_model <- function(dvname, testname){
                          )
             ,test=adjusted("bonferroni"))
 
- # save results to rdata and plain text files
-  rdfile  = file.path(loc$paths$results,paste("lme_",dvname,"_",testname,".Rdata",sep=""))
+ # save results for plotting
+  csvfile  = file.path(loc$paths$results,paste("lme_",dvname,"_",testname,".csv",sep=""))
+  write.csv(data.frame( coff  = summary(m)$coefficients$fixed["configurationOFF"]
+                      , call  = summary(mt)$test$coefficients[1:8]
+                      , err   = summary(mt)$test$sigma[1:8]
+                      , names = names(summary(mt)$test$coefficients[1:8]))
+           ,file = csvfile)
+    
+ # save stats
   txtfile = file.path(loc$paths$results,paste("lme_",dvname,"_",testname,".txt"  ,sep=""))
-  save("m","mt",file = rdfile)
   sink(file = txtfile)
     print(summary(mt))
   sink(file = NULL)

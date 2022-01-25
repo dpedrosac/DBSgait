@@ -12,12 +12,12 @@ configuration66 - configurationOFF == 0   0.05299    0.06428   0.824  0.98122
 configuration100 - configurationOFF == 0  0.27656    0.06925   3.994  < 0.001
 configuration30 - configurationOFF == 0   0.03761    0.06927   0.543  0.99879
 configuration85 - configurationOFF == 0   0.35528    0.06863   5.177  < 0.001
-configuration130 - configurationOFF == 0  0.20143    0.06925   2.909  0.03663
-configuration40 - configurationOFF == 0   0.26760    0.07303   3.664  0.00271
-configuration90 - configurationOFF == 0   0.32028    0.10299   3.110  0.01960
+configuration130 - configurationOFF == 0  0.20143    0.06925   2.909  0.03652
+configuration40 - configurationOFF == 0   0.26760    0.07303   3.664  0.00269
+configuration90 - configurationOFF == 0   0.32028    0.10299   3.110  0.01969
 configuration30 - configuration85 == 0   -0.31767    0.07191  -4.418  < 0.001
-configuration30 - configuration130 == 0  -0.16382    0.07252  -2.259  0.19606
-configuration85 - configuration130 == 0   0.15385    0.07031   2.188  0.22827
+configuration30 - configuration130 == 0  -0.16382    0.07252  -2.259  0.19621
+configuration85 - configuration130 == 0   0.15385    0.07031   2.188  0.22856
 configuration40 - configuration90 == 0   -0.05268    0.10722  -0.491  0.99941
                                             
 configuration33 - configurationOFF == 0     

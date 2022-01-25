@@ -1,0 +1,38 @@
+
+	 Simultaneous Tests for General Linear Hypotheses
+
+Fit: lme.formula(fixed = modelformula, data = ddf, random = ~1 | id, 
+    weights = varIdent(form = ~1 | configuration * test), method = "ML", 
+    na.action = na.omit, control = lmeControl(opt = "optim"))
+
+Linear Hypotheses:
+                                           Estimate Std. Error z value Pr(>|z|)
+configuration33 - configurationOFF == 0  -0.0173947  0.0065479  -2.657   0.0726
+configuration66 - configurationOFF == 0   0.0003452  0.0063508   0.054   1.0000
+configuration100 - configurationOFF == 0  0.0067089  0.0065467   1.025   0.9295
+configuration30 - configurationOFF == 0   0.0266365  0.0065324   4.078   <0.001
+configuration85 - configurationOFF == 0   0.0627924  0.0064132   9.791   <0.001
+configuration130 - configurationOFF == 0  0.0027589  0.0059626   0.463   0.9995
+configuration40 - configurationOFF == 0   0.0369736  0.0067417   5.484   <0.001
+configuration90 - configurationOFF == 0  -0.0030161  0.0078225  -0.386   0.9999
+configuration30 - configuration85 == 0   -0.0361560  0.0063900  -5.658   <0.001
+configuration30 - configuration130 == 0   0.0238776  0.0059456   4.016   <0.001
+configuration85 - configuration130 == 0   0.0600336  0.0056659  10.596   <0.001
+configuration40 - configuration90 == 0    0.0399897  0.0079470   5.032   <0.001
+                                            
+configuration33 - configurationOFF == 0  .  
+configuration66 - configurationOFF == 0     
+configuration100 - configurationOFF == 0    
+configuration30 - configurationOFF == 0  ***
+configuration85 - configurationOFF == 0  ***
+configuration130 - configurationOFF == 0    
+configuration40 - configurationOFF == 0  ***
+configuration90 - configurationOFF == 0     
+configuration30 - configuration85 == 0   ***
+configuration30 - configuration130 == 0  ***
+configuration85 - configuration130 == 0  ***
+configuration40 - configuration90 == 0   ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+(Adjusted p values reported -- single-step method)
+

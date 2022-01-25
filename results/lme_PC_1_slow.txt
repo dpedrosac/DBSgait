@@ -15,8 +15,8 @@ configuration85 - configurationOFF == 0  -0.47811    0.05248  -9.111  < 0.001
 configuration130 - configurationOFF == 0 -0.27604    0.05725  -4.822  < 0.001
 configuration40 - configurationOFF == 0  -0.71349    0.05775 -12.355  < 0.001
 configuration90 - configurationOFF == 0  -0.35184    0.06362  -5.531  < 0.001
-configuration30 - configuration85 == 0    0.08887    0.05382   1.651  0.56769
-configuration30 - configuration130 == 0  -0.11320    0.05853  -1.934  0.37065
+configuration30 - configuration85 == 0    0.08887    0.05382   1.651  0.56773
+configuration30 - configuration130 == 0  -0.11320    0.05853  -1.934  0.37066
 configuration85 - configuration130 == 0  -0.20207    0.05565  -3.631  0.00313
 configuration40 - configuration90 == 0   -0.36165    0.06729  -5.374  < 0.001
                                             

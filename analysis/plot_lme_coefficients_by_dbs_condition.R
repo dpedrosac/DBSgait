@@ -1,17 +1,15 @@
 dvs = c("gait_speed_meter_per_second", "stride_length_cm", "max_sensor_lift_cm", "PC_1")
-tests = c("gait", "tug", "fast", "slow")
+tests = c("gait", "tug", "fast", "normal", "slow")
 
 lme_plot <- function(dvname, test){
 
  # load the data
-  load(file.path(loc$paths$results,paste("lme_",dvname,"_",test,".Rdata",sep="")))
+  df = read.csv(file.path(loc$paths$results,paste("lme_",dvname,"_",test,".csv",sep="")))
 
  # extract model coefficients and standard errors of comparisons
-  coff = summary(m)$coefficients$fixed["configurationOFF"]
-  call = summary(mt)$test$coefficients[1:8]
-  err  = summary(mt)$test$sigma[1:8]
-  sall = c(mean(err), err)
-  means = coff+c(0, call) # first position is OFF (+0)
+  coff = df$coff[1]                # off coefficient is constant 
+  sall = c(mean(df$err), df$err)   # off is the reference level and has no error of its own
+  means = coff+c(0, df$call)       # first position is OFF (+0)
   ll = means - 2*sall
   ul = means + 2*sall
 
@@ -23,7 +21,7 @@ lme_plot <- function(dvname, test){
   yul    = maxy + .1 * rangey
 
  # get tick labels   
-  xtcklab = c("OFF", gsub(" - OFF","",gsub("configuration","",names(call))))
+  xtcklab = c("OFF", gsub(" - OFF","",gsub("configuration","", df$names)))
 
  # do plotting
   plot( c(1:9), means

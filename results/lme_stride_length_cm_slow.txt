@@ -10,15 +10,15 @@ Linear Hypotheses:
 configuration33 - configurationOFF == 0   2.818391   0.566935   4.971  < 0.001
 configuration66 - configurationOFF == 0   3.959118   0.487287   8.125  < 0.001
 configuration100 - configurationOFF == 0  3.098308   0.501186   6.182  < 0.001
-configuration30 - configurationOFF == 0   1.867368   0.541251   3.450  0.00622
+configuration30 - configurationOFF == 0   1.867368   0.541251   3.450  0.00599
 configuration85 - configurationOFF == 0   6.410143   0.490215  13.076  < 0.001
-configuration130 - configurationOFF == 0  1.872766   0.504606   3.711  0.00217
+configuration130 - configurationOFF == 0  1.872766   0.504606   3.711  0.00230
 configuration40 - configurationOFF == 0   6.409393   0.520148  12.322  < 0.001
 configuration90 - configurationOFF == 0   5.674112   0.615628   9.217  < 0.001
 configuration30 - configuration85 == 0   -4.542776   0.533433  -8.516  < 0.001
 configuration30 - configuration130 == 0  -0.005398   0.547541  -0.010  1.00000
 configuration85 - configuration130 == 0   4.537378   0.487060   9.316  < 0.001
-configuration40 - configuration90 == 0    0.735282   0.630225   1.167  0.87684
+configuration40 - configuration90 == 0    0.735282   0.630225   1.167  0.87686
                                             
 configuration33 - configurationOFF == 0  ***
 configuration66 - configurationOFF == 0  ***
