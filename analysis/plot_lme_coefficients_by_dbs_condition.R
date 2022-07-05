@@ -1,7 +1,7 @@
 dvs = c("gait_speed_meter_per_second", "stride_length_cm", "max_sensor_lift_cm", "PC_1")
 tests = c("gait", "tug", "fast", "normal", "slow")
 
-lme_plot <- function(dvname, test, saveplot=FALSE, conds = "all", title = ""){
+lme_plot <- function(dvname, test, saveplot=TRUE, conds = "all", title = "", skipxlabel=FALSE){
 
  # load the data
   df = read.csv(file.path(loc$paths$results,paste("lme_",dvname,"_",test,".csv",sep="")))
@@ -24,13 +24,28 @@ lme_plot <- function(dvname, test, saveplot=FALSE, conds = "all", title = ""){
 
  # set constants
   xpos = c(1, c(2,3,4)+.5, c(5,6,7)+1, c(8,9)+1.5)
-  xlim = c(1,9)
-  cex = 3
-  if(conds == "amplitude"){
-    xlim = c(xpos[1]-.5,xpos[4]+.5)
+  xlim = c(.5,max(xpos)+.5)
+  ylabmgp = c(5,1,0)
+
+  if(conds == "all"){
+    cex = 2.5
+    xlabel = "condition"
+    xlabmgp = c(5,2,0)
+    dev.new(height = 7.6, width = 13)
+    par(mar = c(6,7,4,2))
+    cexsymb = 2
+    cexaxis = cex*.8
+  } else if(conds == "amplitude"){
+    cex = 4
+    cexaxis = cex*.7
+    xlim = c(xlim[1],xpos[4]+.7)
     xpos = xpos[1:4]
-    par(pin = c(3,5))
-    par(mar = c(5,7,4,2) + 0.1)
+    # par(pin = c(1,5))           # set aspect ratio of panel plots
+    par(mar = c(8,9,4,2) + 0.1)   # make room for axis labels
+    xlabel = "amplitude (%)"
+    xlabmgp = c(6.5,2.5,0)
+    ylabmgp = c(6.5,2,0)
+    cexsymb = 4
   }
     
  # get tick labels   
@@ -41,17 +56,17 @@ lme_plot <- function(dvname, test, saveplot=FALSE, conds = "all", title = ""){
       , ylim = c(yll, yul)
       , xlim = xlim
       , pch = 19
-      , cex = 2
+      , cex = cexsymb
       , axes = FALSE, yaxt = "n", xaxt = "n", xlab = "", ylab = ""
       , cex.main = cex*2
       , cex.sub  = cex
       , cex.lab  = cex 
       )
   arrows(xpos, ll, xpos, ul, length = 0)
-  axis(1, at=xpos, labels=xtcklab, cex.axis = cex*.8, mgp=c(3,1.5,0))
-  axis(2, las = 1, cex.axis = cex*.8, mgp = c(4,1,0))
-  title(ylab = loc$dvlut[[dvname]], mgp = c(5,1,0), cex.lab = cex)
-  title(xlab = "condition", mgp = c(4,2,0), cex.lab = cex)    
+  axis(1, at=xpos, labels=xtcklab, cex.axis = cexaxis, mgp = xlabmgp)
+  axis(2, las = 1, cex.axis = cexaxis, mgp = c(4,1,0))
+  title(ylab = loc$dvlut[[dvname]], mgp = ylabmgp, cex.lab = cex)
+  if(!skipxlabel) title(xlab = xlabel, mgp = xlabmgp, cex.lab = cex)    
   box()
 
  # create title for amplitude plots
@@ -59,28 +74,36 @@ lme_plot <- function(dvname, test, saveplot=FALSE, conds = "all", title = ""){
     
  # do separator lines
   abline(v=mean(c(xpos[1], xpos[2])), lty = 3)
-  text(xpos[3], yll, "amplitude (%)", cex = cex*.8)
+
   if(conds == "all"){
       abline(v=c(mean(c(xpos[4], xpos[5])),mean(c(xpos[7], xpos[8]))), lty = 3)
-      text(xpos[6], yll, "frequency (Hz)")
-      text(mean(c(xpos[8],xpos[9])), yll, "duration (us)")
+      text(xpos[3], yll, "amplitude (%)", cex = cex*.7)      
+      text(xpos[6], yll, "frequency (Hz)", cex = cex*.7)
+      text(mean(c(xpos[8],xpos[9])), yll, expression(paste(" duration (",mu,"s)")), cex = cex*.7)
   }
     
-  if(saveplot) savePlot(file.path(loc$paths$img,paste("lme_",dvname,"_",test,".png",sep="")), type = "png")
+  if(saveplot){
+    savePlot(file.path(loc$paths$img,paste("lme_",dvname,"_",test,".png",sep="")), type = "png")
+    dev.off()
+  }    
 }
 
-# run plots over dvnames and tests 
-#grid = expand.grid(dvs, tests, stringsAsFactors = FALSE)
-#mapply(lme_plot, grid$Var1, grid$Var2)
-#lme_plot(dvs[1], tests[1], conds = "amplitude", title = "A")
+lme_plot(dvs[1], tests[1], saveplot = FALSE)
 
-# first make the amplitude only plot:
-dev.new(height = 7, width = 15)
-  op = par(mfrow = c(1,3))
-  lme_plot(dvs[1], tests[1], conds = "amplitude", title = "A")
-  lme_plot(dvs[2], tests[1], conds = "amplitude", title = "B")
-  lme_plot(dvs[3], tests[1], conds = "amplitude", title = "C")
+# run plots over dvnames and tests 
+grid = expand.grid(dvs, tests, stringsAsFactors = FALSE)
+mapply(lme_plot, grid$Var1, grid$Var2)
+lme_plot(dvs[1], tests[1], saveplot = FALSE)
+
+
+# then make the amplitude only plot:
+dev.new(height = 7.6, width = 15)
+  op = par(mfrow = c(1,3), bg = NA)
+  lme_plot(dvs[1], tests[1], conds = "amplitude", title = "A", skipxlabel = TRUE, saveplot = FALSE)
+  lme_plot(dvs[2], tests[1], conds = "amplitude", title = "B", skipxlabel = FALSE, saveplot = FALSE)
+  lme_plot(dvs[3], tests[1], conds = "amplitude", title = "C", skipxlabel = TRUE, saveplot = FALSE)
   savePlot(file.path(loc$paths$img,paste("lme_amplitude_panels.png",sep="")), type = "png")
+  dev.off()
 par(op)
 
-#lme_plot(dvs[1], tests[1], conds = "amplitude")
+

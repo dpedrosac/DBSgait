@@ -10,5 +10,10 @@ if(Sys.info()["user"] == "urs"){
   out$paths$img     = file.path(out$paths$root, "img"    )    
 }
 
+out$dvlut = list(gait_speed_meter_per_second = "gait speed (m/s)"
+                ,stride_length_cm            = "stride length (cm)"
+                ,max_sensor_lift_cm          = "max sensor lift (cm)"
+                ,PC_1                        = "PC 1")
+
 return(out)
 } # end of function local_constants

@@ -11,16 +11,6 @@ source("local-constants.R")
 loc = local_constants()
 loc$dvnames = get_dvnames(df)
 
-# load packages
-ipak(c(
-      "corrplot"
-      # "ggplot2"
-      #,"reshape2"
-      ))
-
-# get data
-#df = get_data()
-
 # --- plots -----------------------------------------------------------------
 
 source("plot_lme_coefficients_by_dbs_condition.R")
