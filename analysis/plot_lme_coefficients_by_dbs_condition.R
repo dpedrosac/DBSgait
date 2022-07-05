@@ -41,7 +41,7 @@ lme_plot <- function(dvname, test, saveplot=TRUE, conds = "all", title = "", ski
     xlim = c(xlim[1],xpos[4]+.7)
     xpos = xpos[1:4]
     # par(pin = c(1,5))           # set aspect ratio of panel plots
-    par(mar = c(8,9,4,2) + 0.1)   # make room for axis labels
+    par(mar = c(8,9,5,2) + c(.1,.2,.1,0))   # make room for axis labels
     xlabel = "amplitude (%)"
     xlabmgp = c(6.5,2.5,0)
     ylabmgp = c(6.5,2,0)
@@ -70,16 +70,16 @@ lme_plot <- function(dvname, test, saveplot=TRUE, conds = "all", title = "", ski
   box()
 
  # create title for amplitude plots
- if(conds == "amplitude") title(title, adj=0, cex.main = cex+1) 
+ if(conds == "amplitude") title(title, adj=0, cex.main = cex+1, line = +2) 
     
  # do separator lines
   abline(v=mean(c(xpos[1], xpos[2])), lty = 3)
 
   if(conds == "all"){
       abline(v=c(mean(c(xpos[4], xpos[5])),mean(c(xpos[7], xpos[8]))), lty = 3)
-      text(xpos[3], yll, "amplitude (%)", cex = cex*.7)      
-      text(xpos[6], yll, "frequency (Hz)", cex = cex*.7)
-      text(mean(c(xpos[8],xpos[9])), yll, expression(paste(" duration (",mu,"s)")), cex = cex*.7)
+      text(xpos[3], yul, "amplitude (%)", cex = cex*.7)      
+      text(xpos[6], yul, "frequency (Hz)", cex = cex*.7)
+      text(mean(c(xpos[8],xpos[9])), yul, expression(paste(" duration (",mu,"s)")), cex = cex*.7)
   }
     
   if(saveplot){
@@ -97,7 +97,7 @@ lme_plot(dvs[1], tests[1], saveplot = FALSE)
 
 
 # then make the amplitude only plot:
-dev.new(height = 7.6, width = 15)
+dev.new(height = 7.8, width = 15)
   op = par(mfrow = c(1,3), bg = NA)
   lme_plot(dvs[1], tests[1], conds = "amplitude", title = "A", skipxlabel = TRUE, saveplot = FALSE)
   lme_plot(dvs[2], tests[1], conds = "amplitude", title = "B", skipxlabel = FALSE, saveplot = FALSE)
