@@ -1,5 +1,6 @@
 dvs = c("gait_speed_meter_per_second", "stride_length_cm", "max_sensor_lift_cm", "PC_1")
-tests = c("fast", "normal", "slow", "tug", "gait")
+#tests = c("fast", "normal", "slow", "tug", "gait")
+tests = c("free")
 
 lme_model <- function(dvname, testname, save = TRUE, padj = "fdr"){
 
@@ -24,6 +25,11 @@ lme_model <- function(dvname, testname, save = TRUE, padj = "fdr"){
     modelformula = as.formula(paste(dvname, "-1 + configuration", sep = "~"))
   }
 
+  if(testname == "free"){
+    ddf = subset(df, test == "free")
+    modelformula = as.formula(paste(dvname, "-1 + configuration", sep = "~"))
+  }
+   
   if(testname == "gait"){
     ddf = subset(df, test != "tug_one" & test != "tug_two")      
     modelformula = as.formula(paste(dvname, "-1 + configuration + test", sep = "~"))

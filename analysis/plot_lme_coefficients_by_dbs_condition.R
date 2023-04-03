@@ -1,6 +1,11 @@
 dvs = c("gait_speed_meter_per_second", "stride_length_cm", "max_sensor_lift_cm", "PC_1")
 tests = c("gait", "tug", "fast", "normal", "slow")
 
+dvs = c("gait_speed_meter_per_second")
+tests = c("fast", "normal", "slow")
+
+
+
 lme_plot <- function(dvname, test, saveplot=TRUE, conds = "all", title = "", skipxlabel=FALSE){
 
  # load the data
@@ -18,9 +23,10 @@ lme_plot <- function(dvname, test, saveplot=TRUE, conds = "all", title = "", ski
   miny   = min(ll)
   maxy   = max(ul)
   rangey = maxy - miny
-  yll    = miny - .1 * rangey
-  yul    = maxy + .1 * rangey
-
+#  yll    = miny - .1 * rangey
+#  yul    = maxy + .1 * rangey
+  yll    = .89
+  yul    = 1.31
 
  # set constants
   xpos = c(1, c(2,3,4)+.5, c(5,6,7)+1, c(8,9)+1.5)
@@ -83,7 +89,8 @@ lme_plot <- function(dvname, test, saveplot=TRUE, conds = "all", title = "", ski
   }
     
   if(saveplot){
-    savePlot(file.path(loc$paths$img,paste("lme_",dvname,"_",test,".png",sep="")), type = "png")
+#    savePlot(file.path(loc$paths$img,paste("lme_",dvname,"_",test,".png",sep="")), type = "png")
+    savePlot(file.path(loc$paths$img,paste("lme_",dvname,"_",test,"_fixylim.png",sep="")), type = "png")
     dev.off()
   }    
 }

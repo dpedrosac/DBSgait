@@ -7,32 +7,46 @@ Fit: lme.formula(fixed = modelformula, data = ddf, random = ~1 | id,
 
 Linear Hypotheses:
                                          Estimate Std. Error z value Pr(>|z|)
-configuration33 - configurationOFF == 0  -0.17916    0.06281  -2.853   0.0427
-configuration66 - configurationOFF == 0  -0.24486    0.05899  -4.151   <0.001
-configuration100 - configurationOFF == 0 -0.14196    0.06529  -2.174   0.2323
-configuration30 - configurationOFF == 0  -0.71197    0.06214 -11.458   <0.001
-configuration85 - configurationOFF == 0  -0.80212    0.06088 -13.176   <0.001
-configuration130 - configurationOFF == 0 -0.43622    0.06215  -7.019   <0.001
-configuration40 - configurationOFF == 0  -0.76875    0.06415 -11.983   <0.001
-configuration90 - configurationOFF == 0  -0.36306    0.07711  -4.708   <0.001
-configuration30 - configuration85 == 0    0.09014    0.06197   1.455   0.7026
-configuration30 - configuration130 == 0  -0.27575    0.06329  -4.357   <0.001
-configuration85 - configuration130 == 0  -0.36589    0.06044  -6.054   <0.001
-configuration40 - configuration90 == 0   -0.40569    0.07894  -5.139   <0.001
+configuration33 - configurationOFF == 0  -0.17916    0.06281  -2.853  0.00588
+configuration66 - configurationOFF == 0  -0.24486    0.05899  -4.151 4.85e-05
+configuration100 - configurationOFF == 0 -0.14196    0.06529  -2.174  0.03525
+configuration30 - configurationOFF == 0  -0.71197    0.06214 -11.458  < 2e-16
+configuration85 - configurationOFF == 0  -0.80212    0.06088 -13.176  < 2e-16
+configuration130 - configurationOFF == 0 -0.43622    0.06215  -7.019 6.05e-12
+configuration40 - configurationOFF == 0  -0.76875    0.06415 -11.983  < 2e-16
+configuration90 - configurationOFF == 0  -0.36306    0.07711  -4.708 4.75e-06
+configuration33 - configuration66 == 0    0.06570    0.06100   1.077  0.28150
+configuration66 - configuration100 == 0  -0.10290    0.06318  -1.629  0.11553
+configuration30 - configuration100 == 0  -0.57002    0.06621  -8.610  < 2e-16
+configuration85 - configuration100 == 0  -0.66016    0.06438 -10.255  < 2e-16
+configuration130 - configuration100 == 0 -0.29427    0.06599  -4.459 1.42e-05
+configuration40 - configuration100 == 0  -0.62679    0.06791  -9.230  < 2e-16
+configuration90 - configuration100 == 0  -0.22110    0.08028  -2.754  0.00745
+configuration30 - configuration85 == 0    0.09014    0.06197   1.455  0.15385
+configuration30 - configuration130 == 0  -0.27575    0.06329  -4.357 2.09e-05
+configuration85 - configuration130 == 0  -0.36589    0.06044  -6.054 3.36e-09
+configuration40 - configuration90 == 0   -0.40569    0.07894  -5.139 5.82e-07
                                             
-configuration33 - configurationOFF == 0  *  
+configuration33 - configurationOFF == 0  ** 
 configuration66 - configurationOFF == 0  ***
-configuration100 - configurationOFF == 0    
+configuration100 - configurationOFF == 0 *  
 configuration30 - configurationOFF == 0  ***
 configuration85 - configurationOFF == 0  ***
 configuration130 - configurationOFF == 0 ***
 configuration40 - configurationOFF == 0  ***
 configuration90 - configurationOFF == 0  ***
+configuration33 - configuration66 == 0      
+configuration66 - configuration100 == 0     
+configuration30 - configuration100 == 0  ***
+configuration85 - configuration100 == 0  ***
+configuration130 - configuration100 == 0 ***
+configuration40 - configuration100 == 0  ***
+configuration90 - configuration100 == 0  ** 
 configuration30 - configuration85 == 0      
 configuration30 - configuration130 == 0  ***
 configuration85 - configuration130 == 0  ***
 configuration40 - configuration90 == 0   ***
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-(Adjusted p values reported -- single-step method)
+(Adjusted p values reported -- fdr method)
 

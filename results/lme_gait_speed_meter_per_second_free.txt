@@ -1,0 +1,52 @@
+
+	 Simultaneous Tests for General Linear Hypotheses
+
+Fit: lme.formula(fixed = modelformula, data = ddf, random = ~1 | id, 
+    weights = varIdent(form = ~1 | configuration * test), method = "ML", 
+    na.action = na.omit, control = lmeControl(opt = "optim"))
+
+Linear Hypotheses:
+                                           Estimate Std. Error z value Pr(>|z|)
+configuration33 - configurationOFF == 0   0.0030562  0.0033401   0.915  0.42772
+configuration66 - configurationOFF == 0   0.0001824  0.0031518   0.058  0.95385
+configuration100 - configurationOFF == 0  0.0457861  0.0031183  14.683  < 2e-16
+configuration30 - configurationOFF == 0   0.0018640  0.0034208   0.545  0.61837
+configuration85 - configurationOFF == 0   0.0484130  0.0031761  15.243  < 2e-16
+configuration130 - configurationOFF == 0  0.0136030  0.0032608   4.172 4.79e-05
+configuration40 - configurationOFF == 0   0.0179998  0.0033573   5.361 1.43e-07
+configuration90 - configurationOFF == 0   0.0425510  0.0041533  10.245  < 2e-16
+configuration33 - configuration66 == 0    0.0028738  0.0030864   0.931  0.42772
+configuration66 - configuration100 == 0  -0.0456037  0.0028121 -16.217  < 2e-16
+configuration30 - configuration100 == 0  -0.0439222  0.0031254 -14.053  < 2e-16
+configuration85 - configuration100 == 0   0.0026269  0.0028252   0.930  0.42772
+configuration130 - configuration100 == 0 -0.0321832  0.0029076 -11.069  < 2e-16
+configuration40 - configuration100 == 0  -0.0277863  0.0030228  -9.192  < 2e-16
+configuration90 - configuration100 == 0  -0.0032352  0.0039267  -0.824  0.45823
+configuration30 - configuration85 == 0   -0.0465490  0.0031775 -14.650  < 2e-16
+configuration30 - configuration130 == 0  -0.0117390  0.0032681  -3.592  0.00048
+configuration85 - configuration130 == 0   0.0348100  0.0029591  11.764  < 2e-16
+configuration40 - configuration90 == 0   -0.0245512  0.0041199  -5.959 4.82e-09
+                                            
+configuration33 - configurationOFF == 0     
+configuration66 - configurationOFF == 0     
+configuration100 - configurationOFF == 0 ***
+configuration30 - configurationOFF == 0     
+configuration85 - configurationOFF == 0  ***
+configuration130 - configurationOFF == 0 ***
+configuration40 - configurationOFF == 0  ***
+configuration90 - configurationOFF == 0  ***
+configuration33 - configuration66 == 0      
+configuration66 - configuration100 == 0  ***
+configuration30 - configuration100 == 0  ***
+configuration85 - configuration100 == 0     
+configuration130 - configuration100 == 0 ***
+configuration40 - configuration100 == 0  ***
+configuration90 - configuration100 == 0     
+configuration30 - configuration85 == 0   ***
+configuration30 - configuration130 == 0  ***
+configuration85 - configuration130 == 0  ***
+configuration40 - configuration90 == 0   ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+(Adjusted p values reported -- fdr method)
+
