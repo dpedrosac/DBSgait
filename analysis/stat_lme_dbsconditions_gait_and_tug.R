@@ -1,8 +1,11 @@
-dvs = c("gait_speed_meter_per_second", "stride_length_cm", "max_sensor_lift_cm", "PC_1")
-#tests = c("fast", "normal", "slow", "tug", "gait")
+dvs = c("gait_speed_meter_per_second", "stride_length_cm", "max_sensor_lift_cm")
+tests = c("fast", "normal", "slow", "tug", "gait")
+
+# Use these for the additional analysis of the "free" condition
+dvs = c("max_sensor_lift_cm")
 tests = c("free")
 
-lme_model <- function(dvname, testname, save = TRUE, padj = "fdr"){
+lme_model <- function(dvname, testname, save = FALSE, padj = "fdr"){
 
  # select data and model depending on test (gait vs tug)
   if(testname == "tug" ){

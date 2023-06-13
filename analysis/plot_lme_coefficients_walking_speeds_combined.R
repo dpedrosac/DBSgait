@@ -7,7 +7,7 @@ lme_plot <- function(dvname, saveplot=TRUE, conds = "all", title = "", skipxlabe
   df.fast   = read.csv(file.path(loc$paths$results,paste("lme_",dvname,"_fast.csv"  ,sep="")))
   df.normal = read.csv(file.path(loc$paths$results,paste("lme_",dvname,"_normal.csv",sep="")))
   df.slow   = read.csv(file.path(loc$paths$results,paste("lme_",dvname,"_slow.csv"  ,sep="")))
-  df.free   = read.csv(file.path(loc$paths$results,paste("lme_",dvname,"_gait.csv"  ,sep="")))
+  df.free   = read.csv(file.path(loc$paths$results,paste("lme_",dvname,"_free.csv"  ,sep="")))
   if(conds == "amplitude") df = df[grep("33|66|100", df$names),]
     
  # extract model coefficients and standard errors of comparisons
@@ -87,23 +87,33 @@ lme_plot <- function(dvname, saveplot=TRUE, conds = "all", title = "", skipxlabe
       , cex.lab  = cex 
       )
 
-  points( xpos, means.fast,   pch = 20, cex = cexsymb , col = rgb(.6,.6,.6))
-  points( xpos, means.normal, pch = 20, cex = cexsymb , col = rgb(.4,.4,.4))
-  points( xpos, means.slow,   pch = 20, cex = cexsymb , col = rgb(.15,.15,.15))
-  points( xpos, means.free,   pch = 18, cex = cexsymb )
-
   # errors
   arrows(xpos, ll.fast,   xpos, ul.fast,   length = 0)
   arrows(xpos, ll.normal, xpos, ul.normal, length = 0)
   arrows(xpos, ll.slow,   xpos, ul.slow,   length = 0)
   arrows(xpos, ll.free,   xpos, ul.free,   length = 0)
 
+  # coefficients
+  points( xpos, means.fast,   pch = 20, cex = cexsymb , col = rgb(.9,.9,.9))
+  points( xpos, means.normal, pch = 20, cex = cexsymb , col = rgb(.7,.7,.7))
+  points( xpos, means.slow,   pch = 20, cex = cexsymb , col = rgb(.5,.5,.5))
+  points( xpos, means.free,   pch = 18, cex = cexsymb )
 
   axis(1, at=xpos, labels=xtcklab, cex.axis = cexaxis, mgp = xlabmgp)
   axis(2, las = 1, cex.axis = cexaxis, mgp = c(4,1,0))
   title(ylab = loc$dvlut[[dvname]], mgp = ylabmgp, cex.lab = cex)
   if(!skipxlabel) title(xlab = xlabel, mgp = xlabmgp, cex.lab = cex)    
   box()
+
+ # add legend
+  legend("topleft", c("fast","normal","slow","free")
+                  , pch = c(20,20,20,18)
+                  , cex = cex*.7
+                  , bty = "n"
+                  , col =  c(rgb(.9,.9,.9)
+                            ,rgb(.7,.7,.7)
+                            ,rgb(.5,.5,.5)
+                            ,rgb( 0, 0, 0)))
 
  # create title for amplitude plots
  if(conds == "amplitude") title(title, adj=0, cex.main = cex+1, line = +2) 
@@ -124,7 +134,7 @@ lme_plot <- function(dvname, saveplot=TRUE, conds = "all", title = "", skipxlabe
   }    
 }
 
-lme_plot(dvs[1],saveplot = FALSE)
+lme_plot(dvs[1],saveplot = TRUE)
 
 # run plots over dvnames and tests 
 #lapply(dvs,lme_plot)
