@@ -2,8 +2,8 @@ dvs = c("gait_speed_meter_per_second", "stride_length_cm", "max_sensor_lift_cm")
 tests = c("fast", "normal", "slow", "tug", "gait")
 
 # Use these for the additional analysis of the "free" condition
-dvs = c("max_sensor_lift_cm")
-tests = c("free")
+#dvs = c("max_sensor_lift_cm")
+#tests = c("free")
 
 lme_model <- function(dvname, testname, save = FALSE, padj = "fdr"){
 
