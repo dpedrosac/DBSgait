@@ -15,6 +15,11 @@ out$dvlut = list(gait_speed_meter_per_second = "gait speed (m/s)"
                 ,max_sensor_lift_cm          = "max sensor lift (cm)"
                 ,PC_1                        = "PC 1")
 
+# define vector of lowfreq subjects which ranges from 1 to 21 excluding 4 & 15
+out$lowfreq = list(id = paste( "Pat_"
+                             , sprintf("%02d", c(1:21)[!c(1:21) %in% c(4,15)])
+                             , sep = ""))
+
 # the following lists indicate significant results in plots due to the
 # requirements of the final revision. these are static since there
 # was no intention to change the analysis anymore. cone marks the
